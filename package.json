@@ -11,5 +11,11 @@
     "url": "git@192.168.12.134:jiuha/webpack-demo.git"
   },
   "author": "jiuha",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "css-loader": "^5.0.1",
+    "ts-loader": "^8.0.14",
+    "webpack": "^5.17.0",
+    "webpack-cli": "^4.4.0"
+  }
 }
