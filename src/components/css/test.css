@@ -1,0 +1,22 @@
+.hello {
+    color: red;
+    font-size: 100px;
+    font-family: 'myFont';
+    background: url('../../images/test.jpg');
+}
+
+@font-face {
+    font-family: 'robotolight';
+    src: url('../../fonts/roboto-light-webfont.woff2') format('woff2'),
+         url('../../fonts/roboto-light-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'myFont';
+    src: url('../../fonts/DroidSansMonoDotted.ttf') format('truetype'),
+         url('../../fonts/DroidSansMonoSlashed.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
