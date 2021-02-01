@@ -1,8 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const WebpackManifestPlugin = require('webpack-manifest-plugin');
+
 module.exports = {
-    mode: 'development',
     target: 'web',
     entry: {
         app: './src/index.js'
@@ -10,9 +11,9 @@ module.exports = {
     output: {
         //输出目录的配置，模板、样式、脚本、图片等资源的路径配置都相对于它
         path: path.join(__dirname, 'dist'),
-        filename: "./main.js",
+        filename: "./[name]_bundle.js",
         // publicPath: "/static/",
-        // library: "test",
+        library: "test",
     },
     module: {
         rules: [
@@ -70,18 +71,20 @@ module.exports = {
         ]
     },
     plugins: [
+        new WebpackManifestPlugin({
+            fileName: 'manifest.json',
+        }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             hash: true,
             compile: true,
             title: 'webpack app'
         }),
+        //热加载模块
         new webpack.HotModuleReplacementPlugin()
     ],
-    devServer: {
-        contentBase: path.join(__dirname, 'dist'),
-        compress: true,
-        port: 9000,
-        inline: true
+    //namedModulesPlugins已经弃用，optimization：{namedModules：true}为替代方案
+    optimization: {
+        namedModules: true
     }
 };

@@ -1,21 +1,31 @@
 import _ from 'lodash'
 import './components/css/test.css'
 import test from './images/test.jpg'
-import Data from './data.xml';
+import Data from './data.xml'
+import {testErrorThrow} from './components/js/test'
 
 // let title = document.getElementById("title");
 // window.onload = () => changeTitleColor();
-document.body.appendChild(component());
+let element = component();
+document.body.appendChild(element);
+
 console.log(Data);
+
+// testErrorThrow();
 
 function component() {
     var element = document.createElement('div');
+    var btn = document.createElement('button');
     // Lodash（目前通过一个 script 脚本引入）对于执行这一行是必需的
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
     element.classList.add('hello');
+    btn.innerHTML = 'Click me and check the console!';
+    btn.onclick = testErrorThrow;
+    
     let myIcon = new Image();
     myIcon.src = test;
 
+    element.appendChild(btn);
     element.appendChild(myIcon);
     return element;
 }
