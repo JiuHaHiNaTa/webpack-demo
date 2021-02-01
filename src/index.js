@@ -2,12 +2,21 @@ import _ from 'lodash'
 import './components/css/test.css'
 import test from './images/test.jpg'
 import Data from './data.xml'
-import {testErrorThrow} from './components/js/test'
+import {
+    testErrorThrow
+} from './components/js/test'
 
 // let title = document.getElementById("title");
 // window.onload = () => changeTitleColor();
 let element = component();
 document.body.appendChild(element);
+
+
+if (process.env.NODE_ENV == 'production') {
+    console.log('Looks like we are in production mode!');
+} else {
+    console.log('Looks like we are in development mode!');
+}
 
 console.log(Data);
 
@@ -21,7 +30,7 @@ function component() {
     element.classList.add('hello');
     btn.innerHTML = 'Click me and check the console!';
     btn.onclick = testErrorThrow;
-    
+
     let myIcon = new Image();
     myIcon.src = test;
 

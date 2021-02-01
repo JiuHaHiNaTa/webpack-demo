@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackManifestPlugin = require('webpack-manifest-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     target: 'web',
@@ -20,12 +21,14 @@ module.exports = {
             //css加载
             {
                 test: /\.css$/,
-                use: [{
-                        loader: 'style-loader'
-                    },
-                    {
-                        loader: 'css-loader'
-                    }
+                //分离css
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    // // style-loader不能跟MiniCssExtractPlugin.loader一起使用
+                    // {
+                    //     loader: 'style-loader'
+                    // }
                 ]
             },
             //ts打包
@@ -71,6 +74,10 @@ module.exports = {
         ]
     },
     plugins: [
+        //分离css 使用MiniCssExtractPlugin替代ExtractTextPlugin
+        new MiniCssExtractPlugin({
+            filename: "index.css"
+        }),
         new WebpackManifestPlugin({
             fileName: 'manifest.json',
         }),
