@@ -1,5 +1,8 @@
+// import _ from 'lodash';
+
 export function testErrorThrow() {
-    console.log("Error From test.js");
+    let message = _.join(['Click','Here','Hello','Jiuha','！！！'], ' ')
+    console.info(message);
 }
 
 

@@ -1,15 +1,21 @@
-import _ from 'lodash'
+// import _ from 'lodash'
 import './components/css/test.css'
 import test from './images/test.jpg'
 import Data from './data.xml'
-import {
-    testErrorThrow
-} from './components/js/test'
+// import {
+//     testErrorThrow
+// } from './components/js/test'
 
 // let title = document.getElementById("title");
 // window.onload = () => changeTitleColor();
+
 let element = component();
 document.body.appendChild(element);
+window.alert('Hmmm, this probably isn\'t a great idea...');
+
+// getComponent().then(component => {
+//     document.body.appendChild(component);
+// })
 
 
 if (process.env.NODE_ENV == 'production') {
@@ -29,7 +35,10 @@ function component() {
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
     element.classList.add('hello');
     btn.innerHTML = 'Click me and check the console!';
-    btn.onclick = testErrorThrow;
+    btn.onclick = e => import('../src/components/js/test').then(module => {
+        let print = module.default;
+        print();
+    });
 
     let myIcon = new Image();
     myIcon.src = test;
@@ -38,6 +47,28 @@ function component() {
     element.appendChild(myIcon);
     return element;
 }
+
+// //promise使用
+// function getComponent() {
+//     return import( /* webpackChunkName: "lodash" */ 'lodash').then(_ => {
+//         var element = document.createElement('div');
+
+//         element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+
+//         return element;
+
+//     }).catch(error => 'An error occurred while loading the component');
+// }
+
+//async 简化promise
+async function getComponent() {
+
+    var element = document.createElement('div');
+    const _ = await import(/* webpackChunkName: "lodash" */ 'lodash');
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+    return element;
+}
+
 
 function changeTitleColor() {
     let element = document.createElement('div');

@@ -8,11 +8,13 @@ const TerserJSPlugin = require('terser-webpack-plugin');
 
 module.exports = merge(common, {
     mode: 'production',
-    devtool: 'source-map',
+    // devtool: 'source-map',
     plugins: [
         new TerserJSPlugin({
             sourceMap: true
         }),
+        //文件hash值相关
+        new webpack.HashedModuleIdsPlugin(),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production')
         })
